@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vyvia Shen</title>
+  <meta name="description" content="Vyvia Shen — psychology and art history student at Oberlin College and aspiring counselor focused on multicultural care." />
+
+  <!-- FONTS
+       Headings: Fraunces (soft, rounded serif, between Julia Kathleen's serif and Skye's sans)
+       Body/UI:  Nunito Sans (rounded humanist sans, close to the Skye layout)
+       To try others, swap the link below and the --font-* variables in :root. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =========================================================
+       1. PALETTE — 16 pops of color pulled from the reference,
+          set against a cream that blends site 1 (#EBE8E1)
+          and site 2 (#FAF7F3).
+       ========================================================= */
+    :root {
+      /* Neutrals */
+      --cream:      #F3EFE8;   /* main background (blend of the two) */
+      --cream-deep: #EBE6DD;   /* slightly darker cream for sections */
+      --paper:      #FAF7F3;   /* lightest, for cards */
+      --ink:        #2E2C2A;   /* main text, warm near-black */
+      --ink-soft:   #6E6A65;   /* secondary text */
+      --line:       #D9D3C9;   /* dividers */
+
+      /* Pops of color */
+      --c-teal:       #2BB0AE;
+      --c-aqua:       #8FD4D8;
+      --c-sky:        #9EC4E6;
+      --c-ocean:      #2E6E96;
+      --c-cobalt:     #2A48A8;
+      --c-periwinkle: #8F9CCB;
+      --c-blush:      #F1D2CE;
+      --c-pink:       #E8A2A8;
+      --c-coral:      #E36E5B;
+      --c-logo-red:   #D8473F;
+      --c-brick:      #A83A2D;
+      --c-orange:     #E8622A;
+      --c-ochre:      #C98B5E;
+      --c-mustard:    #D9A42B;
+      --c-yellow:     #F2C230;
+      --c-butter:     #F3DC8A;
+
+      /* Type */
+      --font-head: "Fraunces", Georgia, serif;
+      --font-body: "Nunito Sans", system-ui, sans-serif;
+
+      /* Layout */
+      --max: 1180px;
+      --gutter: clamp(16px, 4vw, 48px);
+    }
+
+    /* =========================================================
+       2. BASE
+       ========================================================= */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+
+    /* Placeholder image blocks — replace each with an <img> later */
+    .ph {
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.9);
+      font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+      text-align: center; padding: 1rem;
+    }
+
+    /* =========================================================
+       3. NAV (sits on top of the hero, like Skye II)
+       ========================================================= */
+    .nav {
+      position: absolute; top: 0; left: 0; right: 0; z-index: 10;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 28px var(--gutter);
+      color: var(--paper);
+    }
+    .logo {
+      font-family: var(--font-head);
+      font-size: 1.35rem; letter-spacing: 0.18em; text-transform: uppercase;
+      font-weight: 400;
+    }
+    .nav ul { display: flex; gap: 2rem; list-style: none; }
+    .nav a {
+      font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+      padding-bottom: 4px; border-bottom: 1.5px solid transparent;
+      transition: border-color 0.25s;
+    }
+    /* Each nav link gets its own pop of color on hover */
+    .nav li:nth-child(1) a:hover { border-color: var(--c-yellow); }
+    .nav li:nth-child(2) a:hover { border-color: var(--c-coral); }
+    .nav li:nth-child(3) a:hover { border-color: var(--c-aqua); }
+    .nav li:nth-child(4) a:hover { border-color: var(--c-pink); }
+    .nav li:nth-child(5) a:hover { border-color: var(--c-butter); }
+
+    .menu-btn { display: none; background: none; border: 0; color: inherit; font-size: 1.5rem; cursor: pointer; }
+
+    /* =========================================================
+       4. HERO — big landing image
+       ========================================================= */
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      display: flex; align-items: flex-end;
+      color: var(--paper);
+      /* Photo: images/hero.jpg. If it's missing, the color gradient shows instead. */
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.40) 100%),
+        url("images/hero.jpg") center / cover no-repeat,
+        linear-gradient(135deg, var(--c-sky) 0%, var(--c-periwinkle) 45%, var(--c-pink) 100%);
+    }
+    .hero-inner {
+      width: 100%; max-width: var(--max); margin: 0 auto;
+      padding: 0 var(--gutter) 9vh;
+      display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 2rem;
+    }
+    .hero h1 {
+      font-family: var(--font-head); font-weight: 300;
+      font-size: clamp(2.4rem, 6vw, 4.6rem); line-height: 1.08;
+      max-width: 14ch;
+    }
+    .hero-tag {
+      font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+      text-align: right; max-width: 22ch;
+    }
+    .btn {
+      display: inline-block; margin-top: 2rem;
+      padding: 0.85rem 1.6rem;
+      border: 1px solid currentColor;
+      font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+      transition: background 0.25s, color 0.25s, border-color 0.25s;
+    }
+    .hero .btn:hover { background: var(--c-yellow); border-color: var(--c-yellow); color: var(--ink); }
+
+    /* Wallpaper strip between hero and intro */
+    .wallpaper { position: relative; line-height: 0; background: var(--cream); }
+    .wallpaper .wave {
+      position: absolute; left: 0; right: 0; top: -39px;
+      width: 100%; height: 40px; display: block;
+    }
+    .wallpaper .band { display: block; }
+
+    /* =========================================================
+       5. INTRO — follows the Skye II section below the divider
+       ========================================================= */
+    .intro { padding: clamp(40px, 6vw, 80px) 0 clamp(64px, 10vw, 120px); }
+    .intro-top {
+      display: grid; grid-template-columns: 1.4fr 1fr; gap: 2rem; align-items: start;
+    }
+    .intro h2 {
+      font-family: var(--font-head); font-weight: 300;
+      font-size: clamp(1.9rem, 3.6vw, 2.8rem); line-height: 1.2;
+      max-width: 18ch;
+    }
+    .intro h2 em { font-style: italic; color: var(--c-logo-red); }
+    .eyebrow {
+      font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+      text-align: right; color: var(--ink-soft);
+    }
+    .intro-bottom {
+      display: grid; grid-template-columns: 1.4fr 1fr; gap: 2rem;
+      margin-top: clamp(48px, 7vw, 96px); align-items: end;
+    }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .two-col p { font-size: 0.92rem; color: var(--ink-soft); }
+    .intro .btn { color: var(--ink); }
+    .intro .btn:hover { background: var(--c-teal); border-color: var(--c-teal); color: var(--paper); }
+    .intro-img { aspect-ratio: 3 / 4; }
+
+    /* =========================================================
+       6. WORK GRID — the "pops of color" gallery (site 1 energy)
+       ========================================================= */
+    .work { padding: clamp(64px, 9vw, 110px) 0; background: var(--cream-deep); }
+    .section-head {
+      display: flex; justify-content: space-between; align-items: baseline;
+      border-bottom: 1px solid var(--line); padding-bottom: 1rem; margin-bottom: 3rem;
+    }
+    .section-head h3 { font-family: var(--font-head); font-weight: 300; font-size: clamp(1.6rem, 3vw, 2.2rem); }
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5rem 2rem; align-items: start; }
+    /* COLOR FRAMES — your photos sit inside a colored mat, so the
+       palette carries the color even when the photos don't match it.
+       Set the color per frame with style="--pop: var(--c-teal)". */
+    .frame {
+      background: var(--pop, var(--c-teal));
+      padding: clamp(10px, 1.4vw, 18px);
+      display: grid; grid-template: 1fr / 1fr;
+    }
+    /* placeholder and photo stack in the same spot; if the photo file
+       is missing it removes itself and the placeholder shows */
+    .frame > .ph, .frame > img {
+      grid-area: 1 / 1; width: 100%; height: 100%; min-height: 0; object-fit: cover; object-position: center;
+      background: #CFC8BD; color: var(--ink-soft); font-size: 0.6rem; letter-spacing: 0.08em; text-transform: none;
+    }
+    .card { display: block; }
+
+    /* FLIP CARDS */
+    .flip {
+      all: unset; display: block; width: 100%; cursor: pointer;
+      perspective: 1200px; transition: transform 0.35s ease;
+    }
+    .flip:focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; }
+    .card:hover .flip { transform: translateY(-6px); }
+    .flip-inner {
+      display: block; position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.75s cubic-bezier(.2,.7,.2,1);
+    }
+    .flip-inner.tall     { aspect-ratio: 3 / 4; }
+    .flip-inner.portrait { aspect-ratio: 4 / 5; }
+    .card.flipped .flip-inner { transform: rotateY(180deg); }
+    .face {
+      position: absolute; inset: 0;
+      backface-visibility: hidden; -webkit-backface-visibility: hidden;
+      box-shadow: 0 10px 26px rgba(46,44,42,0.10);
+    }
+    .face.back { transform: rotateY(180deg); }
+    .back-text {
+      grid-area: 1 / 1; min-height: 0; overflow: auto;
+      background: var(--paper); color: var(--ink);
+      padding: clamp(12px, 1.4vw, 20px);
+      font-size: 0.78rem; line-height: 1.5;
+      display: flex; align-items: center;
+    }
+    .flip-hint {
+      grid-area: 1 / 1; align-self: end; justify-self: end; margin: 8px;
+      width: 26px; height: 26px; border-radius: 50%;
+      display: grid; place-items: center;
+      background: var(--paper); color: var(--ink); font-size: 0.85rem; line-height: 1;
+      opacity: 0.85; transition: transform 0.4s ease;
+    }
+    .card:hover .flip-hint { transform: rotate(180deg); }
+    @media (prefers-reduced-motion: reduce) { .flip-inner, .flip { transition: none; } }
+
+    .card-title { text-align: center; margin-top: 0.8rem; font-family: var(--font-head); font-size: 0.95rem; line-height: 1.35; }
+    .card small { display: block; margin-top: 0.2rem; text-align: center; color: var(--ink-soft); font-size: 0.75rem; letter-spacing: 0.05em; }
+    /* varied shapes, like the staggered reference grid */
+    .tall   { aspect-ratio: 3 / 4; }
+    .wide   { aspect-ratio: 4 / 3; }
+    .square { aspect-ratio: 1 / 1; }
+    .grid .card:nth-child(even) { margin-top: 2.5rem; }
+
+    /* =========================================================
+       7. ABOUT
+       ========================================================= */
+    .about { padding: clamp(64px, 10vw, 120px) 0; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+    .about-img { aspect-ratio: 4 / 5; }
+    .about h3 { font-family: var(--font-head); font-weight: 300; font-size: clamp(1.8rem, 3.4vw, 2.6rem); margin-bottom: 1.5rem; }
+    .about p { color: var(--ink-soft); margin-bottom: 1rem; font-size: 0.95rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+    .tags span {
+      font-size: 0.72rem; letter-spacing: 0.08em; padding: 0.35rem 0.85rem; border-radius: 999px;
+      color: var(--ink);
+    }
+
+    /* =========================================================
+       8. CONTACT / FOOTER
+       ========================================================= */
+    .contact { background: var(--ink); color: var(--paper); padding: clamp(64px, 9vw, 110px) 0 40px; }
+    .contact h3 { font-family: var(--font-head); font-weight: 300; font-size: clamp(2rem, 4.5vw, 3.4rem); line-height: 1.1; }
+    .contact h3 span { color: var(--c-butter); font-style: italic; }
+    .contact-row { display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 2rem; }
+    .contact a.link { border-bottom: 1px solid var(--c-coral); padding-bottom: 2px; }
+    .contact ul { list-style: none; text-align: right; font-size: 0.9rem; line-height: 2; }
+    .foot {
+      margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.15);
+      display: flex; justify-content: space-between; font-size: 0.72rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.55);
+    }
+    .stripe { display: flex; height: 6px; }
+    .stripe i { flex: 1; }
+
+    /* =========================================================
+       9. VESSEL SHELF
+       ========================================================= */
+    .vessels {
+      padding: clamp(24px, 4vw, 48px) var(--gutter) clamp(56px, 8vw, 96px);
+      overflow-x: clip;
+      --gap: clamp(10px, 1.8vw, 30px);
+      /* vase height chosen so 10 vases + gaps fit across the screen */
+      --vase-h: clamp(90px, calc((100vw - 2 * var(--gutter) - 12 * var(--gap)) * 0.2), 200px);
+    }
+    /* Each shelf is only as long as its vases, centered, evenly spaced */
+    .shelf { display: flex; justify-content: center; }
+    .shelf + .shelf { margin-top: clamp(28px, 3.5vw, 48px); }
+    .half {
+      display: flex; align-items: flex-end;
+      border-bottom: 3px solid var(--c-ochre);
+      padding: 0 calc(var(--gap) / 2);
+    }
+    .shelf .half:first-child { padding-left: var(--gap); }
+    .shelf .half:last-child  { padding-right: var(--gap); }
+    .shelf figure { position: relative; margin: 0 calc(var(--gap) / 2); outline: none; }
+    .shelf svg {
+      height: var(--vase-h); width: auto; display: block; overflow: visible;
+      transform-origin: 50% 100%;
+    }
+    .shelf figure:hover svg, .shelf figure:focus svg { animation: wobble 0.7s ease; }
+    @keyframes wobble {
+      0%, 100% { transform: rotate(0); }
+      25% { transform: rotate(-4deg); }
+      50% { transform: rotate(3deg); }
+      75% { transform: rotate(-1.5deg); }
+    }
+    /* Labels float under the shelf on hover and take up no space */
+    .shelf figcaption {
+      position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%);
+      white-space: nowrap; pointer-events: none; z-index: 2;
+      font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--ink-soft); opacity: 0; transition: opacity 0.3s ease;
+    }
+    .shelf figure:hover figcaption, .shelf figure:focus figcaption { opacity: 1; }
+    /* Narrow screens: each shelf splits into two shorter shelves of 5 */
+    @media (max-width: 700px) {
+      .vessels { --vase-h: clamp(70px, calc((100vw - 2 * var(--gutter) - 6 * var(--gap)) * 0.4), 140px); }
+      .shelf { flex-direction: column; align-items: center; gap: clamp(28px, 6vw, 40px); }
+      .shelf .half { padding: 0 var(--gap); }
+    }
+    @media (prefers-reduced-motion: reduce) { .shelf figure:hover svg, .shelf figure:focus svg { animation: none; } }
+
+    /* =========================================================
+       10. RESPONSIVE
+       ========================================================= */
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .intro-top, .intro-bottom, .about-grid { grid-template-columns: 1fr; }
+      .eyebrow, .hero-tag { text-align: left; }
+      .hero-inner { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .nav ul {
+        display: none; position: absolute; top: 72px; right: var(--gutter);
+        flex-direction: column; gap: 1rem; background: var(--paper); color: var(--ink);
+        padding: 1.4rem 1.8rem; box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      }
+      .nav ul.open { display: flex; }
+      .menu-btn { display: block; }
+      .two-col { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+      .grid .card:nth-child(even) { margin-top: 0; }
+      .contact ul { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== NAV ===================== -->
+  <nav class="nav">
+    <a href="#" class="logo">Vyvia Shen</a>
+    <button class="menu-btn" aria-label="Open menu" onclick="document.querySelector('.nav ul').classList.toggle('open')">&#9776;</button>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Experiences</a></li>
+      <li><a href="cv.pdf" target="_blank" rel="noopener">CV</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===================== HERO ===================== -->
+  <header class="hero">
+    <div class="hero-inner">
+      <div>
+        <h1>Vyvia’s story.</h1>
+        <a href="#work" class="btn">See my experiences</a>
+      </div>
+      <p class="hero-tag">psychology · art history · multicultural care</p>
+    </div>
+  </header>
+
+  <!-- ===================== WALLPAPER STRIP =====================
+       Soft wave edge over the hero, then a repeating band of
+       palette flowers, leaves, dots and flowing vines on cream. -->
+  <div class="wallpaper" aria-hidden="true">
+    <svg class="wave" viewBox="0 0 1440 40" preserveAspectRatio="none">
+      <path d="M0 40 L0 22 C 240 2, 480 40, 720 22 S 1200 4, 1440 22 L1440 40 Z" fill="#F3EFE8"/>
+    </svg>
+    <svg class="band" width="100%" height="130">
+      <defs>
+        <g id="flower">
+          <ellipse cx="0" cy="-8" rx="5.5" ry="9"/>
+          <ellipse cx="0" cy="-8" rx="5.5" ry="9" transform="rotate(72)"/>
+          <ellipse cx="0" cy="-8" rx="5.5" ry="9" transform="rotate(144)"/>
+          <ellipse cx="0" cy="-8" rx="5.5" ry="9" transform="rotate(216)"/>
+          <ellipse cx="0" cy="-8" rx="5.5" ry="9" transform="rotate(288)"/>
+        </g>
+        <path id="leaf" d="M0 0 Q 9 -9 18 0 Q 9 9 0 0 Z"/>
+        <path id="sparkle" d="M0 -8 Q 1.5 -1.5 8 0 Q 1.5 1.5 0 8 Q -1.5 1.5 -8 0 Q -1.5 -1.5 0 -8 Z"/>
+
+        <pattern id="wallpaper-tile" width="320" height="130" patternUnits="userSpaceOnUse">
+          <!-- flowing vines (seamless across tiles) -->
+          <path d="M0 65 C 40 25, 120 25, 160 65 S 280 105, 320 65" fill="none" stroke="#2BB0AE" stroke-width="2" stroke-linecap="round"/>
+          <path d="M0 108 C 60 123, 100 123, 160 108 S 260 93, 320 108" fill="none" stroke="#8F9CCB" stroke-width="1.5" stroke-dasharray="1 6" stroke-linecap="round"/>
+
+          <!-- leaves along the vine -->
+          <use href="#leaf" fill="#2BB0AE" transform="translate(30 48) rotate(-60)"/>
+          <use href="#leaf" fill="#C98B5E" transform="translate(126 44) rotate(20)"/>
+          <use href="#leaf" fill="#2BB0AE" transform="translate(196 84) rotate(130)"/>
+          <use href="#leaf" fill="#D9A42B" transform="translate(292 82) rotate(-20)"/>
+
+          <!-- flowers -->
+          <use href="#flower" fill="#E8A2A8" transform="translate(80 35)"/>
+          <circle cx="80" cy="35" r="4.5" fill="#F2C230"/>
+          <use href="#flower" fill="#E36E5B" transform="translate(240 95) scale(0.85)"/>
+          <circle cx="240" cy="95" r="4" fill="#F3DC8A"/>
+          <use href="#flower" fill="#9EC4E6" transform="translate(178 18) scale(0.55)"/>
+          <circle cx="178" cy="18" r="2.6" fill="#E8622A"/>
+
+          <!-- fun shapes -->
+          <circle cx="22" cy="104" r="5" fill="#8F9CCB"/>
+          <circle cx="300" cy="24" r="3.5" fill="#9EC4E6"/>
+          <circle cx="128" cy="98" r="3" fill="#D8473F"/>
+          <use href="#sparkle" fill="#2A48A8" transform="translate(150 84) scale(0.9)"/>
+          <use href="#sparkle" fill="#F2C230" transform="translate(40 14) scale(0.7)"/>
+          <path d="M238 28 q 6 -8 12 0 t 12 0 t 12 0" fill="none" stroke="#E8622A" stroke-width="2" stroke-linecap="round"/>
+          <path d="M98 118 a 9 9 0 0 1 18 0" fill="none" stroke="#A83A2D" stroke-width="2" stroke-linecap="round"/>
+          <rect x="268" y="114" width="7" height="7" rx="1.5" fill="#8FD4D8" transform="rotate(20 271 117)"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#wallpaper-tile)"/>
+    </svg>
+  </div>
+
+  <!-- ===================== INTRO ===================== -->
+  <section class="intro">
+    <div class="wrap">
+      <div class="intro-top">
+        <h2>Hi, I’m Vyvia, <em>a psychology and art history student and aspiring counselor</em> based in Oberlin, Ohio.</h2>
+        <p class="eyebrow">Making room for every story</p>
+      </div>
+      <div class="intro-bottom">
+        <div>
+          <div class="two-col">
+            <p>I’m a senior at Oberlin College studying Psychology and Art History, with a minor in Feminist Studies. I grew up in Shanghai, then Spain, then suburban Georgia. Whenever I was lost amidst the cultures, I would soon find myself again under others’ helpful wings. That supportive community is what inspired me to advocate for others, and to help improve the systems we all live within.</p>
+            <p>I’m working toward a career in clinical mental health counseling. I hope to work with people of all ages, with a focus on older adults, neurodivergent individuals, and culturally diverse communities. I believe that when people rework their own stories, filled with dense darkness and startling light, and come to see them through a lens of care and compassion, those stories go on to change the people around them and to shape our collective narrative.</p>
+          </div>
+          <a href="#about" class="btn">More about me</a>
+        </div>
+        <div class="intro-img frame" style="--pop:var(--c-aqua)"><div class="ph">images/intro.jpg</div><img src="images/intro.jpg" alt="Vyvia Shen" onerror="this.remove()"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== WORK GRID ===================== -->
+  <section class="work" id="work">
+    <div class="wrap">
+      <div class="section-head">
+        <h3>Selected Experiences</h3>
+        <span class="eyebrow">Click a card to flip it</span>
+      </div>
+      <div class="grid">
+        <!-- Click a card to flip it. Photos load from the images/ folder. -->
+        <article class="card" style="--pop:var(--c-teal)">
+          <button class="flip" type="button" aria-pressed="false" aria-label="Asian Diasporic Women Study: show details">
+            <span class="flip-inner tall">
+              <span class="face front frame"><span class="ph">images/exp-01-research.jpg</span><img src="images/exp-01-research.jpg" alt="" onerror="this.remove()"><span class="flip-hint" aria-hidden="true">&#8635;</span></span>
+              <span class="face back frame"><span class="back-text">As a woman deeply influenced by beauty culture, and situated within a double bind, I wanted to hear how other Asian American women have navigated appearance and belonging across their lives. I’m designing a life-story interview study with women aged 60 and older, to inform culturally responsive counseling.</span></span>
+            </span>
+          </button>
+          <p class="card-title">Asian Diasporic Women Study</p><small>Principal Investigator · Oberlin · 2026–</small>
+        </article>
+        <article class="card" style="--pop:var(--c-orange)">
+          <button class="flip" type="button" aria-pressed="false" aria-label="Verosky Face Perception Lab: show details">
+            <span class="flip-inner portrait">
+              <span class="face front frame"><span class="ph">images/exp-02-verosky-lab.jpg</span><img src="images/exp-02-verosky-lab.jpg" alt="" onerror="this.remove()"><span class="flip-hint" aria-hidden="true">&#8635;</span></span>
+              <span class="face back frame"><span class="back-text">I record EEG data for an honors thesis on how likability affects false-belief reasoning (N400 paradigm). I apply electrodes, monitor signal quality across 2.5-hour sessions, and schedule 4–5 participants a week.</span></span>
+            </span>
+          </button>
+          <p class="card-title">Verosky Face Perception Lab</p><small>Research Assistant · Oberlin · 2026–</small>
+        </article>
+        <article class="card" style="--pop:var(--c-pink)">
+          <button class="flip" type="button" aria-pressed="false" aria-label="Magro Lab: show details">
+            <span class="flip-inner tall">
+              <span class="face front frame"><span class="ph">images/exp-03-magro-lab.jpg</span><img src="images/exp-03-magro-lab.jpg" alt="" onerror="this.remove()"><span class="flip-hint" aria-hidden="true">&#8635;</span></span>
+              <span class="face back frame"><span class="back-text">I contribute to a registered meta-analysis on Child-Parent Psychotherapy, and help draft IRB protocols and training materials for a school-based Teacher-Child Interaction Training pilot.</span></span>
+            </span>
+          </button>
+          <p class="card-title">Magro Lab</p><small>Research Volunteer · Oberlin · 2026–</small>
+        </article>
+        <article class="card" style="--pop:var(--c-butter)">
+          <button class="flip" type="button" aria-pressed="false" aria-label="Kendal at Oberlin: show details">
+            <span class="flip-inner portrait">
+              <span class="face front frame"><span class="ph">images/exp-04-kendal.jpg</span><img src="images/exp-04-kendal.jpg" alt="" onerror="this.remove()"><span class="flip-hint" aria-hidden="true">&#8635;</span></span>
+              <span class="face back frame"><span class="back-text">Observing psychosocial intake assessments and care planning, conducting resident interviews, and facilitating therapeutic groups for older adults with cognitive and physical impairments.</span></span>
+            </span>
+          </button>
+          <p class="card-title">Kendal at Oberlin</p><small>Clinical Intern · Oberlin · starting Nov 2026</small>
+        </article>
+        <article class="card" style="--pop:var(--c-periwinkle)">
+          <button class="flip" type="button" aria-pressed="false" aria-label="Jiapei Aiwo Rehabilitation Clinic: show details">
+            <span class="flip-inner tall">
+              <span class="face front frame"><span class="ph">images/exp-05-jiapei-aiwo.jpg</span><img src="images/exp-05-jiapei-aiwo.jpg" alt="" onerror="this.remove()"><span class="flip-hint" aria-hidden="true">&#8635;</span></span>
+              <span class="face back frame"><span class="back-text">Over 160 hours, I assisted in trauma-informed care for 10 children ages 5–15 with neurodevelopmental, speech-language, and physical disabilities. I led play-based sessions in Mandarin, used communication boards and AAC supports, and advised families on home practice.</span></span>
+            </span>
+          </button>
+          <p class="card-title">Jiapei Aiwo Rehabilitation Clinic</p><small>Clinical Rehabilitation Intern · Shanghai · 2026</small>
+        </article>
+        <article class="card" style="--pop:var(--c-coral)">
+          <button class="flip" type="button" aria-pressed="false" aria-label="Gentiva Hospice: show details">
+            <span class="flip-inner portrait">
+              <span class="face front frame"><span class="ph">images/exp-06-gentiva-hospice.jpg</span><img src="images/exp-06-gentiva-hospice.jpg" alt="" onerror="this.remove()"><span class="flip-hint" aria-hidden="true">&#8635;</span></span>
+              <span class="face back frame"><span class="back-text">I offered anticipatory grief and bereavement support to patients and families, facilitated life review through compassionate presence, and designed expressive arts and legacy projects for meaning-making.</span></span>
+            </span>
+          </button>
+          <p class="card-title">Gentiva Hospice</p><small>Hospice Volunteer · Atlanta · 2025</small>
+        </article>
+        <article class="card" style="--pop:var(--c-ocean)">
+          <button class="flip" type="button" aria-pressed="false" aria-label="IntergenConnect: show details">
+            <span class="flip-inner tall">
+              <span class="face front frame"><span class="ph">images/exp-07-intergenconnect.jpg</span><img src="images/exp-07-intergenconnect.jpg" alt="" onerror="this.remove()"><span class="flip-hint" aria-hidden="true">&#8635;</span></span>
+              <span class="face back frame"><span class="back-text">I co-direct intergenerational events reaching 60+ participants, including a community dinner and an in-museum program at the Allen. I manage the budget and venue partnerships, and lead accessibility planning for older adults.</span></span>
+            </span>
+          </button>
+          <p class="card-title">IntergenConnect</p><small>Intergenerational Planning Team · Oberlin · 2026–</small>
+        </article>
+        <article class="card" style="--pop:var(--c-mustard)">
+          <button class="flip" type="button" aria-pressed="false" aria-label="Shanghai Disabled Persons Employment Service Center: show details">
+            <span class="flip-inner portrait">
+              <span class="face front frame"><span class="ph">images/exp-08-shanghai-employment.jpg</span><img src="images/exp-08-shanghai-employment.jpg" alt="" onerror="this.remove()"><span class="flip-hint" aria-hidden="true">&#8635;</span></span>
+              <span class="face back frame"><span class="back-text">I supported adults with intellectual, psychiatric, and neurodevelopmental disabilities in a 40-person Mandarin program, coaching job-application, public speaking, and life skills to foster independence.</span></span>
+            </span>
+          </button>
+          <p class="card-title">Shanghai Disabled Persons Employment Service Center</p><small>Vocational Support Volunteer · Shanghai · 2026</small>
+        </article>
+        <article class="card" style="--pop:var(--c-aqua)">
+          <button class="flip" type="button" aria-pressed="false" aria-label="Oberlin Elementary After-School: show details">
+            <span class="flip-inner tall">
+              <span class="face front frame"><span class="ph">images/exp-09-oberlin-elementary.jpg</span><img src="images/exp-09-oberlin-elementary.jpg" alt="" onerror="this.remove()"><span class="flip-hint" aria-hidden="true">&#8635;</span></span>
+              <span class="face back frame"><span class="back-text">I co-supervised 70 K–5 students in a safe, affirming after-school space, created accessible activities for creativity and peer belonging, and used positive behavior guidance.</span></span>
+            </span>
+          </button>
+          <p class="card-title">Oberlin Elementary After-School</p><small>Group Leader · Oberlin · 2025–26</small>
+        </article>
+        <article class="card" style="--pop:var(--c-brick)">
+          <button class="flip" type="button" aria-pressed="false" aria-label="Resident Assistant: show details">
+            <span class="flip-inner portrait">
+              <span class="face front frame"><span class="ph">images/exp-10-resident-assistant.jpg</span><img src="images/exp-10-resident-assistant.jpg" alt="" onerror="this.remove()"><span class="flip-hint" aria-hidden="true">&#8635;</span></span>
+              <span class="face back frame"><span class="back-text">I’m a first-line support for a first-year residential community: building connection, noticing emerging wellbeing concerns, and connecting residents with resources.</span></span>
+            </span>
+          </button>
+          <p class="card-title">Resident Assistant</p><small>Residential Life · Oberlin · 2026–</small>
+        </article>
+        <article class="card" style="--pop:var(--c-sky)">
+          <button class="flip" type="button" aria-pressed="false" aria-label="Allen Memorial Art Museum: show details">
+            <span class="flip-inner tall">
+              <span class="face front frame"><span class="ph">images/exp-11-allen-museum.jpg</span><img src="images/exp-11-allen-museum.jpg" alt="" onerror="this.remove()"><span class="flip-hint" aria-hidden="true">&#8635;</span></span>
+              <span class="face back frame"><span class="back-text">I design original K–5 curricula and lead gallery tours using Visual Thinking Strategies and open discussion.</span></span>
+            </span>
+          </button>
+          <p class="card-title">Allen Memorial Art Museum</p><small>Gallery Guide · Oberlin · 2026–</small>
+        </article>
+        <article class="card" style="--pop:var(--c-yellow)">
+          <button class="flip" type="button" aria-pressed="false" aria-label="Wilder Voice Magazine: show details">
+            <span class="flip-inner portrait">
+              <span class="face front frame"><span class="ph">images/exp-12-wilder-voice.jpg</span><img src="images/exp-12-wilder-voice.jpg" alt="" onerror="this.remove()"><span class="flip-hint" aria-hidden="true">&#8635;</span></span>
+              <span class="face back frame"><span class="back-text">I compose original magazine layouts with the editing team, and plan outreach events.</span></span>
+            </span>
+          </button>
+          <p class="card-title">Wilder Voice Magazine</p><small>Layout Editor · Oberlin · 2024–</small>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ABOUT ===================== -->
+  <section class="about" id="about">
+    <div class="wrap about-grid">
+      <div class="about-img frame" style="--pop:var(--c-yellow)"><div class="ph">images/about.jpg</div><img src="images/about.jpg" alt="Portrait of Vyvia Shen" onerror="this.remove()"></div>
+      <div>
+        <h3>Aspiring activist therapist</h3>
+        <p>I’m deeply committed to multicultural care and community building. Navigating the U.S. in contemporary times, I’ve come to understand the power of collecting multicultural memories. I’ve also seen the spheres of bonding that form when diverse groups come together through what they’ve shared. I hope to contribute to this growing momentum of coming together: finding our similarities, and finding meaning in our differences.</p>
+        <p>As a budding mental health practitioner, I’ve come to see each person as located within constellations: of systemic and interpersonal power, of their own strengths and struggles, and of the strengths and struggles of the communities around them. My mission is to help people envision the whole cosmology of their lives. I also believe advocacy and activism can powerfully start with grassroots narratives in one-on-one relationships, which then ripple out to communities, and to more communities. Through my training as a therapist, and hopefully one day as a counseling psychologist, I hope to carry what I learn into systemic change.</p>
+        <p>Growing up across three countries has shaped the curiosity I bring to my own life. Though I’m a bit of a creature of habit, I’m always eager to explore the boundless world around me. I’m a native speaker of Mandarin and English, I speak Spanish at an advanced level, and I’m avidly learning Shanghainese and French. Outside of psychology, I love anything cozy and anything old. I paint lots of watercolors and want to get into film photography. One thing that always makes me happy is tea and a midnight walk.</p>
+        <div class="tags">
+          <span style="background:var(--c-aqua)">multicultural care</span>
+          <span style="background:var(--c-butter)">feminist activism</span>
+          <span style="background:var(--c-pink)">aging &amp; belonging</span>
+          <span style="background:var(--c-sky)">disability support</span>
+          <span style="background:var(--c-blush)">grassroots advocacy</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== VESSEL SHELF =====================
+       Decorative shelf of vases from different traditions, drawn in
+       the palette colors. All share a 200-unit-tall viewBox, so their
+       relative heights stay true. Hover makes them wobble. -->
+  <section class="vessels" aria-label="Illustrated shelf of vessels">
+    <div class="shelf">
+        <div class="half">
+          <figure tabindex="0">
+        <svg preserveAspectRatio="xMidYMax meet" viewBox="0 0 100 200">
+          <defs><clipPath id="clip-amph"><path d="M40 200 L60 200 L58 190 C 84 162 88 112 70 82 L62 64 L62 42 L70 36 L30 36 L38 42 L38 64 L30 82 C 12 112 16 162 42 190 Z"/></clipPath></defs>
+          <path d="M38 46 C 18 44 16 70 30 82" fill="none" stroke="#A83A2D" stroke-width="4" stroke-linecap="round"/>
+          <path d="M62 46 C 82 44 84 70 70 82" fill="none" stroke="#A83A2D" stroke-width="4" stroke-linecap="round"/>
+          <path d="M40 200 L60 200 L58 190 C 84 162 88 112 70 82 L62 64 L62 42 L70 36 L30 36 L38 42 L38 64 L30 82 C 12 112 16 162 42 190 Z" fill="#E8622A"/>
+          <g clip-path="url(#clip-amph)">
+            <rect x="0" y="96" width="100" height="5" fill="#A83A2D"/>
+            <rect x="0" y="103" width="100" height="11" fill="#F3DC8A"/>
+            <g fill="#A83A2D"><circle cx="22" cy="108.5" r="1.8"/><circle cx="30" cy="108.5" r="1.8"/><circle cx="38" cy="108.5" r="1.8"/><circle cx="46" cy="108.5" r="1.8"/><circle cx="54" cy="108.5" r="1.8"/><circle cx="62" cy="108.5" r="1.8"/><circle cx="70" cy="108.5" r="1.8"/><circle cx="78" cy="108.5" r="1.8"/></g>
+            <rect x="0" y="116" width="100" height="5" fill="#A83A2D"/>
+            <rect x="0" y="170" width="100" height="30" fill="#A83A2D"/>
+          </g>
+          <rect x="28" y="32" width="44" height="5" rx="2" fill="#A83A2D"/>
+        </svg>
+        <figcaption>amphora · Greece</figcaption>
+      </figure>
+          <figure tabindex="0">
+        <svg preserveAspectRatio="xMidYMax meet" viewBox="0 0 80 200">
+          <path d="M24 200 L56 200 C 76 188 78 150 62 136 L18 136 C 2 150 4 188 24 200 Z" fill="#E8A2A8"/>
+          <path d="M14 178 C 26 170 40 166 62 158" fill="none" stroke="#A83A2D" stroke-width="1.2"/>
+          <g fill="#FAF7F3">
+            <use href="#flower" transform="translate(24 172) scale(0.4)"/>
+            <use href="#flower" transform="translate(48 163) scale(0.45)"/>
+            <use href="#flower" transform="translate(38 186) scale(0.35)"/>
+            <use href="#flower" transform="translate(60 150) scale(0.3)"/>
+          </g>
+          <g fill="#E36E5B"><circle cx="24" cy="172" r="1.4"/><circle cx="48" cy="163" r="1.6"/><circle cx="38" cy="186" r="1.2"/><circle cx="60" cy="150" r="1.1"/></g>
+          <path d="M20 134 C 20 120 30 114 40 114 C 50 114 60 120 60 134 Z" fill="#E8A2A8"/>
+          <rect x="18" y="132" width="44" height="5" rx="2" fill="#E36E5B"/>
+          <circle cx="40" cy="110" r="4.5" fill="#E36E5B"/>
+        </svg>
+        <figcaption>ginger jar · China</figcaption>
+      </figure>
+          <figure tabindex="0">
+        <svg preserveAspectRatio="xMidYMax meet" viewBox="0 0 70 200">
+          <defs><clipPath id="clip-lek"><path d="M26 200 L44 200 L42 194 L50 186 L50 92 C 50 82 44 78 38 76 L38 52 L44 46 L26 46 L32 52 L32 76 C 26 78 20 82 20 92 L20 186 L28 194 Z"/></clipPath></defs>
+          <path d="M38 58 C 48 58 52 70 47 80" fill="none" stroke="#A83A2D" stroke-width="3" stroke-linecap="round"/>
+          <path d="M26 200 L44 200 L42 194 L50 186 L50 92 C 50 82 44 78 38 76 L38 52 L44 46 L26 46 L32 52 L32 76 C 26 78 20 82 20 92 L20 186 L28 194 Z" fill="#D8473F"/>
+          <g clip-path="url(#clip-lek)">
+            <rect x="0" y="90" width="70" height="5" fill="#F3DC8A"/>
+            <rect x="26" y="112" width="18" height="44" rx="2" fill="#F3DC8A"/>
+            <path d="M35 120 C 31 128 39 136 35 144 C 33 148 35 150 35 150" fill="none" stroke="#A83A2D" stroke-width="1.5"/>
+            <rect x="0" y="176" width="70" height="4" fill="#F3DC8A"/>
+          </g>
+          <rect x="24" y="42" width="22" height="5" rx="2" fill="#A83A2D"/>
+        </svg>
+        <figcaption>lekythos · Greece</figcaption>
+      </figure>
+          <figure tabindex="0">
+        <svg preserveAspectRatio="xMidYMax meet" viewBox="0 0 70 200">
+          <path d="M31 153 L39 153 L39 186 L52 200 L18 200 L31 186 Z" fill="#2BB0AE"/>
+          <path d="M8 112 C 10 140 24 152 35 154 C 46 152 60 140 62 112 Z" fill="#2BB0AE"/>
+          <g fill="none" stroke="#2E6E96" stroke-width="1.5" stroke-linecap="round">
+            <path d="M35 153 C 30 140 26 126 22 113"/><path d="M35 153 C 40 140 44 126 48 113"/>
+            <path d="M35 153 L35 113"/><path d="M35 152 C 26 145 18 132 15 113"/><path d="M35 152 C 44 145 52 132 55 113"/>
+          </g>
+          <ellipse cx="35" cy="112" rx="27" ry="3" fill="#8FD4D8"/>
+        </svg>
+        <figcaption>lotus chalice · Egypt</figcaption>
+      </figure>
+          <figure tabindex="0">
+        <svg preserveAspectRatio="xMidYMax meet" viewBox="0 0 90 200">
+          <defs><clipPath id="clip-mei"><path d="M34 200 L56 200 C 58 172 80 122 78 82 C 77 62 62 54 52 52 L52 42 L56 38 L34 38 L38 42 L38 52 C 28 54 13 62 12 82 C 10 122 32 172 34 200 Z"/></clipPath></defs>
+          <path d="M46 40 C 46 26 50 16 58 6" fill="none" stroke="#A83A2D" stroke-width="2" stroke-linecap="round"/>
+          <path d="M48 24 C 40 20 34 14 32 5" fill="none" stroke="#A83A2D" stroke-width="1.5" stroke-linecap="round"/>
+          <g fill="#E8A2A8">
+            <use href="#flower" transform="translate(58 7) scale(0.38)"/>
+            <use href="#flower" transform="translate(32 6) scale(0.32)"/>
+            <use href="#flower" transform="translate(53 17) scale(0.28)"/>
+            <use href="#flower" transform="translate(38 15) scale(0.25)"/>
+          </g>
+          <path d="M34 200 L56 200 C 58 172 80 122 78 82 C 77 62 62 54 52 52 L52 42 L56 38 L34 38 L38 42 L38 52 C 28 54 13 62 12 82 C 10 122 32 172 34 200 Z" fill="#9EC4E6"/>
+          <g clip-path="url(#clip-mei)" fill="none" stroke="#2A48A8" stroke-linecap="round">
+            <rect x="0" y="60" width="90" height="4" fill="#2A48A8" stroke="none"/>
+            <path d="M4 74 q 7 -6 14 0 t 14 0 t 14 0 t 14 0 t 14 0 t 14 0" stroke-width="2"/>
+            <path d="M2 120 c 10 -14 24 -14 34 0 s 24 14 34 0 s 24 -14 34 0" stroke-width="2.5"/>
+            <circle cx="28" cy="104" r="3" fill="#2A48A8" stroke="none"/><circle cx="62" cy="136" r="3" fill="#2A48A8" stroke="none"/>
+            <rect x="0" y="168" width="90" height="4" fill="#2A48A8" stroke="none"/>
+          </g>
+          <rect x="33" y="35" width="24" height="4" rx="2" fill="#2A48A8"/>
+        </svg>
+        <figcaption>meiping · China</figcaption>
+      </figure>
+        </div>
+        <div class="half">
+          <figure tabindex="0">
+        <svg preserveAspectRatio="xMidYMax meet" viewBox="0 0 110 200">
+          <path d="M38 200 L72 200 C 100 190 106 150 96 128 C 90 116 80 110 74 108 L74 98 L36 98 L36 108 C 30 110 20 116 14 128 C 4 150 10 190 38 200 Z" fill="#F1D2CE"/>
+          <ellipse cx="38" cy="138" rx="9" ry="16" fill="#FAF7F3" opacity="0.5"/>
+          <path d="M10 152 C 40 156 70 148 100 152" fill="none" stroke="#E8A2A8" stroke-width="1" opacity="0.7"/>
+          <rect x="34" y="95" width="42" height="5" rx="2" fill="#E8A2A8"/>
+        </svg>
+        <figcaption>moon jar · Korea</figcaption>
+      </figure>
+          <figure tabindex="0">
+        <svg preserveAspectRatio="xMidYMax meet" viewBox="0 0 80 200">
+          <defs><clipPath id="clip-can"><path d="M22 200 L58 200 C 65 178 66 124 60 92 L20 92 C 14 124 15 178 22 200 Z"/></clipPath></defs>
+          <path d="M22 200 L58 200 C 65 178 66 124 60 92 L20 92 C 14 124 15 178 22 200 Z" fill="#C98B5E"/>
+          <g clip-path="url(#clip-can)">
+            <rect x="0" y="94" width="80" height="5" fill="#2A48A8"/>
+            <rect x="0" y="101" width="80" height="4" fill="#F3DC8A"/>
+            <rect x="0" y="107" width="80" height="5" fill="#2A48A8"/>
+            <rect x="35" y="122" width="10" height="62" rx="1" fill="#F3DC8A"/>
+            <g fill="#2A48A8"><circle cx="40" cy="130" r="2"/><rect x="37" y="138" width="6" height="2"/><path d="M37 152 L43 152 L40 146 Z"/><circle cx="40" cy="162" r="2"/><rect x="37" y="171" width="6" height="2"/></g>
+          </g>
+          <path d="M28 66 L23 44 L35 60 Z" fill="#2BB0AE"/>
+          <path d="M52 66 L57 44 L45 60 Z" fill="#2BB0AE"/>
+          <path d="M17 93 L63 93 C 63 72 56 60 40 58 C 24 60 17 72 17 93 Z" fill="#2BB0AE"/>
+          <rect x="15" y="90" width="50" height="4" rx="2" fill="#2E6E96"/>
+        </svg>
+        <figcaption>canopic jar · Egypt</figcaption>
+      </figure>
+          <figure tabindex="0">
+        <svg preserveAspectRatio="xMidYMax meet" viewBox="0 0 70 200">
+          <path d="M35 126 C 35 102 38 86 36 66" fill="none" stroke="#2BB0AE" stroke-width="2" stroke-linecap="round"/>
+          <use href="#leaf" fill="#2BB0AE" transform="translate(36 98) rotate(-35)"/>
+          <use href="#flower" fill="#D9A42B" transform="translate(36 60) scale(0.8)"/>
+          <circle cx="36" cy="60" r="3.5" fill="#E36E5B"/>
+          <path d="M28 200 L42 200 C 48 180 47 152 39 142 L39 124 L31 124 L31 142 C 23 152 22 180 28 200 Z" fill="#8F9CCB"/>
+          <rect x="25" y="168" width="20" height="3" fill="#2A48A8"/>
+        </svg>
+        <figcaption>bud vase · modern</figcaption>
+      </figure>
+          <figure tabindex="0">
+        <svg preserveAspectRatio="xMidYMax meet" viewBox="0 0 100 200">
+          <defs><clipPath id="clip-ken"><path d="M30 200 L60 200 C 82 194 86 160 66 146 L60 142 L58 112 L62 106 L38 106 L42 112 L40 142 L34 146 C 14 160 18 194 30 200 Z"/></clipPath></defs>
+          <path d="M64 162 C 76 158 84 150 88 138 L94 141 C 90 156 82 168 70 174 Z" fill="#2E6E96"/>
+          <path d="M30 200 L60 200 C 82 194 86 160 66 146 L60 142 L58 112 L62 106 L38 106 L42 112 L40 142 L34 146 C 14 160 18 194 30 200 Z" fill="#2E6E96"/>
+          <g clip-path="url(#clip-ken)">
+            <rect x="0" y="124" width="100" height="3" fill="#8FD4D8"/>
+            <rect x="0" y="152" width="100" height="4" fill="#8FD4D8"/>
+            <path d="M6 172 q 6 -6 12 0 t 12 0 t 12 0 t 12 0 t 12 0 t 12 0 t 12 0" fill="none" stroke="#8FD4D8" stroke-width="2"/>
+            <rect x="0" y="188" width="100" height="4" fill="#8FD4D8"/>
+          </g>
+          <rect x="36" y="102" width="28" height="5" rx="2" fill="#8FD4D8"/>
+        </svg>
+        <figcaption>kendi · Southeast Asia</figcaption>
+      </figure>
+          <figure tabindex="0">
+        <svg preserveAspectRatio="xMidYMax meet" viewBox="0 0 80 200">
+          <defs><clipPath id="clip-hulu"><path d="M30 200 L50 200 C 70 194 72 160 54 140 C 50 136 50 132 54 128 C 64 118 60 98 44 96 L44 88 L36 88 L36 96 C 20 98 16 118 26 128 C 30 132 30 136 26 140 C 8 160 10 194 30 200 Z"/></clipPath></defs>
+          <path d="M30 200 L50 200 C 70 194 72 160 54 140 C 50 136 50 132 54 128 C 64 118 60 98 44 96 L44 88 L36 88 L36 96 C 20 98 16 118 26 128 C 30 132 30 136 26 140 C 8 160 10 194 30 200 Z" fill="#F2C230"/>
+          <g clip-path="url(#clip-hulu)">
+            <rect x="0" y="129" width="80" height="10" fill="#E36E5B"/>
+            <g fill="#D9A42B"><circle cx="28" cy="170" r="2.5"/><circle cx="52" cy="170" r="2.5"/><circle cx="40" cy="185" r="2.5"/><circle cx="40" cy="156" r="2.5"/><circle cx="34" cy="112" r="2.2"/><circle cx="46" cy="112" r="2.2"/></g>
+          </g>
+          <path d="M54 135 C 62 141 64 151 60 159" fill="none" stroke="#E36E5B" stroke-width="2.5" stroke-linecap="round"/>
+          <rect x="34" y="85" width="12" height="4" rx="1.5" fill="#E36E5B"/>
+        </svg>
+        <figcaption>hulu vase · China</figcaption>
+      </figure>
+        </div>
+      </div>
+      <div class="shelf">
+        <div class="half">
+          <figure tabindex="0">
+        <svg preserveAspectRatio="xMidYMax meet" viewBox="0 0 100 200">
+          <defs><clipPath id="clip-ban"><path d="M30 200 L60 200 L60 192 C 86 180 88 140 70 126 C 66 122 64 118 66 112 L24 112 C 26 118 24 122 20 126 C 2 140 4 180 30 192 Z"/></clipPath></defs>
+          <path d="M30 200 L60 200 L60 192 C 86 180 88 140 70 126 C 66 122 64 118 66 112 L24 112 C 26 118 24 122 20 126 C 2 140 4 180 30 192 Z" fill="#F3DC8A"/>
+          <g clip-path="url(#clip-ban)" fill="none" stroke="#A83A2D" stroke-width="2.2" stroke-linecap="round">
+            <path d="M8 138 C 30 130 60 130 82 138"/>
+            <path d="M28 160 c 0 -7 11 -7 11 0 c 0 11 -19 11 -19 0 c 0 -15 27 -15 27 0"/>
+            <path d="M62 160 c 0 -7 -11 -7 -11 0 c 0 11 19 11 19 0 c 0 -15 -27 -15 -27 0"/>
+            <path d="M8 182 C 30 190 60 190 82 182"/>
+          </g>
+          <rect x="22" y="108" width="46" height="5" rx="2" fill="#A83A2D"/>
+        </svg>
+        <figcaption>Ban Chiang jar · Thailand</figcaption>
+      </figure>
+          <figure tabindex="0">
+        <svg preserveAspectRatio="xMidYMax meet" viewBox="0 0 100 200">
+          <defs><clipPath id="clip-ewer"><path d="M38 200 L62 200 L60 194 C 76 184 78 150 64 132 C 58 124 56 112 56 100 L56 70 L44 70 L44 100 C 44 112 42 124 36 132 C 22 150 24 184 40 194 Z"/></clipPath></defs>
+          <path d="M56 78 C 74 78 82 102 66 130" fill="none" stroke="#2BB0AE" stroke-width="4" stroke-linecap="round"/>
+          <path d="M46 98 C 36 82 28 66 20 50 L15 52 C 21 70 30 90 43 106 Z" fill="#2BB0AE"/>
+          <path d="M38 200 L62 200 L60 194 C 76 184 78 150 64 132 C 58 124 56 112 56 100 L56 70 L44 70 L44 100 C 44 112 42 124 36 132 C 22 150 24 184 40 194 Z" fill="#2BB0AE"/>
+          <g clip-path="url(#clip-ewer)">
+            <rect x="0" y="150" width="100" height="13" fill="#F3DC8A"/>
+            <g fill="#2BB0AE"><circle cx="34" cy="156.5" r="2"/><circle cx="44" cy="156.5" r="2"/><circle cx="54" cy="156.5" r="2"/><circle cx="64" cy="156.5" r="2"/></g>
+            <rect x="0" y="186" width="100" height="3" fill="#F3DC8A"/>
+            <rect x="0" y="84" width="100" height="3" fill="#F3DC8A"/>
+          </g>
+          <rect x="41" y="66" width="18" height="5" rx="2" fill="#F3DC8A"/>
+          <circle cx="50" cy="61" r="4" fill="#F3DC8A"/>
+        </svg>
+        <figcaption>ewer · Persia</figcaption>
+      </figure>
+          <figure tabindex="0">
+        <svg preserveAspectRatio="xMidYMax meet" viewBox="0 0 120 200">
+          <path d="M15 153 C 3 152 4 165 17 163" fill="none" stroke="#E8622A" stroke-width="3" stroke-linecap="round"/>
+          <path d="M105 153 C 117 152 116 165 103 163" fill="none" stroke="#E8622A" stroke-width="3" stroke-linecap="round"/>
+          <path d="M56 170 L64 170 L64 188 L78 200 L42 200 L56 188 Z" fill="#A83A2D"/>
+          <path d="M14 150 C 18 166 40 172 60 172 C 80 172 102 166 106 150 Z" fill="#E8622A"/>
+          <path d="M24 158 C 40 164 80 164 96 158" fill="none" stroke="#A83A2D" stroke-width="2"/>
+          <g fill="#A83A2D"><circle cx="40" cy="166" r="1.6"/><circle cx="60" cy="168" r="1.6"/><circle cx="80" cy="166" r="1.6"/></g>
+          <rect x="12" y="147" width="96" height="4" rx="2" fill="#A83A2D"/>
+        </svg>
+        <figcaption>kylix · Greece</figcaption>
+      </figure>
+          <figure tabindex="0">
+        <svg preserveAspectRatio="xMidYMax meet" viewBox="0 0 120 200">
+          <defs><clipPath id="clip-olla"><path d="M40 200 L80 200 C 108 194 116 160 104 134 C 98 122 86 114 80 112 L80 102 L40 102 L40 112 C 34 114 22 122 16 134 C 4 160 12 194 40 200 Z"/></clipPath></defs>
+          <path d="M40 200 L80 200 C 108 194 116 160 104 134 C 98 122 86 114 80 112 L80 102 L40 102 L40 112 C 34 114 22 122 16 134 C 4 160 12 194 40 200 Z" fill="#F1D2CE"/>
+          <g clip-path="url(#clip-olla)">
+            <rect x="0" y="116" width="120" height="4" fill="#A83A2D"/>
+            <path d="M0 136 l8 -10 l8 10 l8 -10 l8 10 l8 -10 l8 10 l8 -10 l8 10 l8 -10 l8 10 l8 -10 l8 10 l8 -10 l8 10 l8 -10" fill="none" stroke="#2E6E96" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M14 168 L22 150 L30 168 Z M38 168 L46 150 L54 168 Z M62 168 L70 150 L78 168 Z M86 168 L94 150 L102 168 Z" fill="#A83A2D"/>
+            <rect x="0" y="175" width="120" height="3" fill="#2E6E96"/>
+            <rect x="0" y="187" width="120" height="13" fill="#A83A2D"/>
+          </g>
+          <rect x="38" y="99" width="44" height="5" rx="2" fill="#A83A2D"/>
+        </svg>
+        <figcaption>olla · Acoma Pueblo</figcaption>
+      </figure>
+          <figure tabindex="0">
+        <svg preserveAspectRatio="xMidYMax meet" viewBox="0 0 70 200">
+          <defs><clipPath id="clip-alb"><path d="M18 200 L52 200 C 56 196 56 190 52 186 C 47 170 47 140 52 122 C 56 118 56 112 52 108 L52 100 L18 100 L18 108 C 14 112 14 118 18 122 C 23 140 23 170 18 186 C 14 190 14 196 18 200 Z"/></clipPath></defs>
+          <path d="M18 200 L52 200 C 56 196 56 190 52 186 C 47 170 47 140 52 122 C 56 118 56 112 52 108 L52 100 L18 100 L18 108 C 14 112 14 118 18 122 C 23 140 23 170 18 186 C 14 190 14 196 18 200 Z" fill="#2A48A8"/>
+          <g clip-path="url(#clip-alb)">
+            <rect x="0" y="120" width="70" height="3" fill="#F2C230"/>
+            <path d="M10 154 C 20 140 30 168 40 154 S 60 140 70 154" fill="none" stroke="#F2C230" stroke-width="2"/>
+            <use href="#leaf" fill="#F2C230" transform="translate(23 148) rotate(-35) scale(0.6)"/>
+            <use href="#leaf" fill="#F2C230" transform="translate(42 160) rotate(25) scale(0.6)"/>
+            <g fill="#F2C230"><circle cx="30" cy="136" r="1.8"/><circle cx="40" cy="172" r="1.8"/></g>
+            <rect x="0" y="185" width="70" height="3" fill="#F2C230"/>
+          </g>
+          <rect x="16" y="97" width="38" height="5" rx="2" fill="#F2C230"/>
+        </svg>
+        <figcaption>albarello · Spain</figcaption>
+      </figure>
+        </div>
+        <div class="half">
+          <figure tabindex="0">
+        <svg preserveAspectRatio="xMidYMax meet" viewBox="0 0 70 200">
+          <defs><clipPath id="clip-tok"><path d="M24 200 L46 200 C 62 192 64 160 50 148 C 44 142 40 132 40 118 L40 92 L44 88 L26 88 L30 92 L30 118 C 30 132 26 142 20 148 C 6 160 8 192 24 200 Z"/></clipPath></defs>
+          <path d="M24 200 L46 200 C 62 192 64 160 50 148 C 44 142 40 132 40 118 L40 92 L44 88 L26 88 L30 92 L30 118 C 30 132 26 142 20 148 C 6 160 8 192 24 200 Z" fill="#D9A42B"/>
+          <g clip-path="url(#clip-tok)">
+            <path d="M0 80 L70 80 L70 150 C 64 150 62 162 58 162 C 54 162 54 152 48 152 C 44 152 44 170 38 170 C 32 170 34 150 28 150 C 22 150 22 160 16 160 C 12 160 10 150 0 150 Z" fill="#2E6E96"/>
+          </g>
+          <rect x="24" y="85" width="22" height="4" rx="2" fill="#2E6E96"/>
+        </svg>
+        <figcaption>tokkuri · Japan</figcaption>
+      </figure>
+          <figure tabindex="0">
+        <svg preserveAspectRatio="xMidYMax meet" viewBox="0 0 80 200">
+          <path d="M14 128 L66 128 L66 120 C 70 110 64 100 70 92 C 60 96 58 106 54 110 C 54 98 46 92 50 82 C 42 88 40 100 40 108 C 40 100 38 88 30 82 C 34 92 26 98 26 110 C 22 106 20 96 10 92 C 16 100 10 110 14 120 Z" fill="#A83A2D"/>
+          <path d="M26 200 L54 200 C 60 180 64 150 62 126 L18 126 C 16 150 20 180 26 200 Z" fill="#A83A2D"/>
+          <g fill="none" stroke="#C98B5E" stroke-width="1.5" stroke-linecap="round">
+            <path d="M20 140 C 30 136 50 144 60 140"/>
+            <path d="M21 156 C 30 152 50 160 61 156"/>
+            <path d="M23 172 C 32 168 48 176 58 172"/>
+            <path d="M25 187 C 34 184 46 190 56 187"/>
+          </g>
+        </svg>
+        <figcaption>Jōmon pot · Japan</figcaption>
+      </figure>
+          <figure tabindex="0">
+        <svg preserveAspectRatio="xMidYMax meet" viewBox="0 0 90 200">
+          <path d="M30 200 L60 200 C 80 190 82 150 66 134 C 58 126 54 116 54 104 L54 86 L58 80 L32 80 L36 86 L36 104 C 36 116 32 126 24 134 C 8 150 10 190 30 200 Z" fill="#8FD4D8"/>
+          <rect x="36" y="92" width="18" height="3" fill="#2A48A8"/>
+          <path d="M45 194 C 45 176 45 164 45 151" fill="none" stroke="#2BB0AE" stroke-width="2" stroke-linecap="round"/>
+          <use href="#leaf" fill="#2BB0AE" transform="translate(45 180) rotate(-40) scale(0.8)"/>
+          <use href="#leaf" fill="#2BB0AE" transform="translate(45 178) rotate(-140) scale(0.8)"/>
+          <path d="M38 151 C 36 141 40 135 41 132 L45 140 L49 132 C 50 135 54 141 52 151 Z" fill="#D8473F"/>
+          <g fill="#2A48A8"><circle cx="28" cy="164" r="3"/><circle cx="62" cy="164" r="3"/><circle cx="34" cy="186" r="2"/><circle cx="56" cy="186" r="2"/></g>
+          <rect x="30" y="77" width="30" height="5" rx="2" fill="#2A48A8"/>
+        </svg>
+        <figcaption>İznik vase · Türkiye</figcaption>
+      </figure>
+          <figure tabindex="0">
+        <svg preserveAspectRatio="xMidYMax meet" viewBox="0 0 90 200">
+          <path d="M30 147 C 28 120 40 108 45 108 C 50 108 62 120 60 147" fill="none" stroke="#C98B5E" stroke-width="6"/>
+          <rect x="41" y="88" width="8" height="22" fill="#C98B5E"/>
+          <rect x="39" y="86" width="12" height="4" rx="1.5" fill="#F3DC8A"/>
+          <path d="M24 200 L66 200 C 82 194 84 168 76 156 C 70 148 60 144 45 144 C 30 144 20 148 14 156 C 6 168 8 194 24 200 Z" fill="#C98B5E"/>
+          <path d="M10 170 C 30 176 60 176 80 170" fill="none" stroke="#F3DC8A" stroke-width="3"/>
+          <g fill="#F3DC8A"><circle cx="30" cy="186" r="2.5"/><circle cx="45" cy="188" r="2.5"/><circle cx="60" cy="186" r="2.5"/><circle cx="35" cy="157" r="2"/><circle cx="55" cy="157" r="2"/></g>
+        </svg>
+        <figcaption>stirrup-spout vessel · Peru</figcaption>
+      </figure>
+          <figure tabindex="0">
+        <svg preserveAspectRatio="xMidYMax meet" viewBox="0 0 70 200">
+          <path d="M14 200 L56 200 L58 110 L12 110 Z" fill="#E36E5B"/>
+          <rect x="12" y="110" width="46" height="7" fill="#A83A2D"/>
+          <g fill="#F3DC8A"><rect x="16" y="124" width="10" height="10" rx="3"/><rect x="30" y="124" width="10" height="10" rx="3"/><rect x="44" y="124" width="10" height="10" rx="3"/></g>
+          <g fill="#A83A2D"><circle cx="21" cy="129" r="1.6"/><circle cx="35" cy="129" r="1.6"/><circle cx="49" cy="129" r="1.6"/></g>
+          <path d="M13 164 h8 v-8 h8 v8 h8 v-8 h8 v8 h8 v-8 h4" fill="none" stroke="#F3DC8A" stroke-width="2.5" stroke-linejoin="round"/>
+          <rect x="13" y="188" width="44" height="6" fill="#A83A2D"/>
+          <rect x="10" y="107" width="50" height="4" rx="2" fill="#A83A2D"/>
+        </svg>
+        <figcaption>cylinder vase · Maya</figcaption>
+      </figure>
+        </div>
+      </div>
+    </section>
+
+  <!-- ===================== CONTACT ===================== -->
+  <div class="stripe" id="stripe"></div>
+  <footer class="contact" id="contact">
+    <div class="wrap">
+      <div class="contact-row">
+        <h3>Let's <span>connect.</span></h3>
+        <ul>
+          <li><a class="link" href="mailto:vshen@oberlin.edu">vshen@oberlin.edu</a></li>
+          <li><a class="link" href="https://www.linkedin.com/in/vyvia-shen-1ab323435" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a class="link" href="cv.pdf" target="_blank" rel="noopener">CV (PDF)</a></li>
+        </ul>
+      </div>
+      <div class="foot">
+        <span>© 2026 Vyvia Shen</span>
+        <span>Oberlin, OH</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Rainbow stripe above the footer, built from the palette
+    const pops = ["teal","aqua","sky","ocean","cobalt","periwinkle","blush","pink",
+                  "coral","logo-red","brick","orange","ochre","mustard","yellow","butter"];
+    const stripe = document.getElementById("stripe");
+    const css = getComputedStyle(document.documentElement);
+    pops.forEach(name => {
+      stripe.insertAdjacentHTML("beforeend", `<i style="background:${css.getPropertyValue("--c-" + name).trim()}"></i>`);
+    });
+
+    // Flip cards: click (or Enter / Space) to flip
+    document.querySelectorAll(".card .flip").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const on = btn.closest(".card").classList.toggle("flipped");
+        btn.setAttribute("aria-pressed", on);
+      });
+    });
+
+    // PHOTOS OF ANY SHAPE: each frame takes the shape of its photo.
+    // Limits (width ÷ height) keep extreme panoramas or very tall shots
+    // from breaking the layout; anything beyond is gently cropped.
+    const LIMITS = { card: [0.6, 1.3], frame: [0.6, 1.5] };
+    function fitPhoto(img) {
+      if (!img.naturalWidth) return;
+      const ratio = img.naturalWidth / img.naturalHeight;
+      const card = img.closest(".flip-inner");
+      const box = card || img.closest(".frame");
+      const [lo, hi] = card ? LIMITS.card : LIMITS.frame;
+      const r = Math.min(hi, Math.max(lo, ratio));
+      box.dataset.ratio = r;
+      box.style.aspectRatio = r;
+      fitAllText();
+    }
+    // Shrink a card's back text if it doesn't fit (e.g. on a wide card)
+    function fitAllText() {
+      document.querySelectorAll(".back-text").forEach(el => {
+        let size = 13.2;                       // ≈ 0.82rem
+        el.style.fontSize = size + "px";
+        while (el.scrollHeight > el.clientHeight + 1 && size > 10.5) {
+          size -= 0.4; el.style.fontSize = size + "px";
+        }
+        // still too long? let a wide card grow a little taller
+        const box = el.closest(".flip-inner");
+        if (box && box.dataset.ratio) {
+          let r = parseFloat(box.dataset.ratio);
+          box.style.aspectRatio = r;
+          while (el.scrollHeight > el.clientHeight + 1 && r > 0.75) {
+            r -= 0.05; box.style.aspectRatio = r;
+          }
+        }
+      });
+    }
+    document.querySelectorAll(".frame img").forEach(img => {
+      if (img.complete) fitPhoto(img); else img.addEventListener("load", () => fitPhoto(img));
+    });
+    fitAllText();
+    let resizeTimer;
+    window.addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(fitAllText, 150); });
+
+    // Close the phone menu after tapping a link
+    document.querySelectorAll(".nav ul a").forEach(a =>
+      a.addEventListener("click", () => document.querySelector(".nav ul").classList.remove("open")));
+  </script>
+</body>
+</html>
